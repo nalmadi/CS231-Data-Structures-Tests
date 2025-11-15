@@ -1,14 +1,10 @@
-/**
- * EdgeTests.java
- * Alex Solano
- * CS 231 A
- * 5/5/23
- * 
- * Provides tests for Edge.java
- * 
- * To compile: javac EdgeTests.java
- * To run: java -ea EdgeTests
- */
+/*
+file name:      EdgeTests.java
+Authors:        Alex Solano
+last modified:  11/15/2025
+
+How to run:     java -ea EdgeTests.java
+*/
 
 public class EdgeTests{
 

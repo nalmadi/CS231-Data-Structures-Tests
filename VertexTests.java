@@ -1,14 +1,10 @@
-/**
- * VertexTests.java
- * Alex Solano
- * CS 231 A
- * 5/5/23
- * 
- * Provides tests for Vertex.java
- * 
- * To compile: javac VertexTests.java
- * To run: java -ea VertexTests
- */
+/*
+file name:      VertexTests.java
+Authors:        Alex Solano
+last modified:  11/15/2025
+
+How to run:     java -ea VertexTests.java
+*/
 
 public class VertexTests{
 

@@ -1,16 +1,10 @@
-import java.util.HashMap;
+/*
+file name:      GraphTests.java
+Authors:        Alex Solano
+last modified:  11/15/2025
 
-/**
- * GraphTests.java
- * Alex Solano
- * CS 231 A
- * 5/5/23
- * 
- * Provides tests for Graph.java
- * 
- * To compile: javac GraphTests.java
- * To run: java -ea GraphTests
- */
+How to run:     java -ea GraphTests.java
+*/
 
 public class GraphTests{
 
