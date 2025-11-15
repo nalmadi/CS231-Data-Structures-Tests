@@ -9,6 +9,7 @@ How to run:     java -ea GraphTests.java
 public class GraphTests{
 
     public static void main(String[] args){
+        
         // test case 1: constructor(), size(), getVertices(), getEdges()
         {
             // given 
@@ -114,14 +115,14 @@ public class GraphTests{
                 size_v++;
             }
             
-            System.out.println("Size: " + size + " == 3");
+            System.out.println("Size: " + size_v + " == 3");
             
             int size_e = 0;
             for(Edge e : myGraph.getEdges()){
                 size_e++;
             }
             
-            System.out.println("Number of Edges: " + size + " == 0");
+            System.out.println("Number of Edges: " + size_e + " == 0");
             
             // then 
             assert myGraph.size() == 3 : "Erorr in Graph::addVertex()";
@@ -263,9 +264,9 @@ public class GraphTests{
             Vertex source = a;
 
             // when 
-            System.out.println("We are given a Graph with vertices {a, b, c, d, e, f, g, h} and {(a,b), (a,c), " +
+            System.out.println("We are given a Graph with vertices {a, b, c, d, e, f, g, h} and edges {(a,b), (a,c), " +
             "(a,d), (b,c), (b,e), (c,d), (c,f), (d,g), (e,f), (e,h), (f,h), (f,g), (g,h)}");
-            System.out.println("For simplicity, our source is going to vertex a");
+            System.out.println("For simplicity, our source is going to be vertex a");
             System.out.println("Let's see the minimumal distance of all the vertices from the source");
             
             HashMap<Vertex, Double> minDistances = myGraph.distanceFrom(source);

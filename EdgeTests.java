@@ -10,7 +10,6 @@ public class EdgeTests{
 
     public static void main(String[] args){
         
-        
         // test case 1: constuctor and distance()
         {
             // given

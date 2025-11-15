@@ -23,7 +23,7 @@ public class VertexTests{
             // then
             assert v1 != null : "Error in Vertex::Vertex()";
             assert v1.adjacentVertices().size() == 0 : "Error in Vertex::Vertex() or Vertex::adjacentVertices()";
-            assert v1.incidenEdges().size() == 0 : "Error in Vertex::Vertex() or Vertex::incidenEdges()";
+            assert v1.incidenEdges().size() == 0 : "Error in Vertex::Vertex() or Vertex::incidentEdges()";
         }
 
         // test case 2: addEdge(), getEdgeTo(), adjacentVertices(), incidentEdges()
@@ -57,12 +57,13 @@ public class VertexTests{
             System.out.println("Does an edge exist between v3 and v1? " + (v3.getEdgeTo(v1) != null));
             System.out.println("Does an edge exist between v2 and v3? " + (v2.getEdgeTo(v3) != null));
             
+            // then
             assert v1.adjacentVertices().size() == 2 : "Error in Vertex::addEdge() or Vertex::adjacentVertices()";
-            assert v1.incidenEdges().size() == 2 : "Error in Vertex::addEdge() or Vertex::incidenEdges()";
+            assert v1.incidenEdges().size() == 2 : "Error in Vertex::addEdge() or Vertex::incidentEdges()";
             assert v2.adjacentVertices().size() == 1 : "Error in Vertex::addEdge() or Vertex::adjacentVertices()";
-            assert v2.incidenEdges().size() == 1 : "Error in Vertex::addEdge() or Vertex::incidenEdges()";
+            assert v2.incidenEdges().size() == 1 : "Error in Vertex::addEdge() or Vertex::incidentEdges()";
             assert v3.adjacentVertices().size() == 1 : "Error in Vertex::addEdge() or Vertex::adjacentVertices()";
-            assert v3.incidenEdges().size() == 1 : "Error in Vertex::addEdge() or Vertex::incidenEdges()";
+            assert v3.incidenEdges().size() == 1 : "Error in Vertex::addEdge() or Vertex::incidentEdges()";
             assert v1.getEdgeTo(v2) != null : "Error in Vertex:getEdgeTo()";
             assert v2.getEdgeTo(v1) != null : "Error in Vertex:getEdgeTo()";
             assert v1.getEdgeTo(v3) != null : "Error in Vertex:getEdgeTo()";
@@ -111,14 +112,13 @@ public class VertexTests{
             assert r1 == true : "Error in Vertex::removeEdge()";
             assert r2 == true : "Error in Vertex::removeEdge()";
             assert v1.adjacentVertices().size() == 1 : "Error in Vertex::addEdge() or Vertex::adjacentVertices()";
-            assert v1.incidenEdges().size() == 1 : "Error in Vertex::addEdge() or Vertex::incidenEdges()";
+            assert v1.incidenEdges().size() == 1 : "Error in Vertex::addEdge() or Vertex::incidentEdges()";
             assert v2.adjacentVertices().size() == 0 : "Error in Vertex::addEdge() or Vertex::adjacentVertices()";
-            assert v2.incidenEdges().size() == 0 : "Error in Vertex::addEdge() or Vertex::incidenEdges()";
+            assert v2.incidenEdges().size() == 0 : "Error in Vertex::addEdge() or Vertex::incidentEdges()";
             assert v1.getEdgeTo(v2) == null : "Error in Vertex::removeEdge() or Vertex::getEdgeTo()";
             assert v2.getEdgeTo(v1) == null : "Error in Vertex::removeEdge() or Vertex::getEdgeTo()";
             assert v1.getEdgeTo(v3) != null : "Error in Vertex::addEdge() or Vertex::getEdgeTo()";
         }
-
         System.out.println("*** Done testing Vertex.java! ***");
     }
 }
