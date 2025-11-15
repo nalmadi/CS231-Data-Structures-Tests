@@ -23,6 +23,8 @@ public class BSTMapTests {
             assert size == 0 : "Error in BSTMap::size() for empty map";
         }
 
+
+
         // CASE 2: put & get
         {
             // GIVEN
@@ -31,11 +33,16 @@ public class BSTMapTests {
             // WHEN
             map.put("apple", 5);
             int value = map.get("apple");
+            int size = map.size();
             System.out.println(value + " == 5");
+            System.out.println(size + " == 1");
 
             // THEN
             assert value == 5 : "Error in BSTMap::put() or get()";
+            assert size == 1 : "Error in BSTMap::size() after single insertion";
         }
+
+
 
         // CASE 3: overwrite value
         {
@@ -51,6 +58,8 @@ public class BSTMapTests {
             // THEN
             assert value == 10 : "Error in BSTMap::put() overwrite";
         }
+
+
 
         // CASE 4: containsKey
         {
@@ -69,6 +78,8 @@ public class BSTMapTests {
             assert !missingKey : "Error in BSTMap::containsKey() for missing key";
         }
 
+
+
         // CASE 5: remove key
         {
             // GIVEN
@@ -84,8 +95,87 @@ public class BSTMapTests {
             assert !contains : "Error in BSTMap::remove()";
         }
 
+
+
+        // CASE 6: remove node in left subtree (not root)
+        {
+            // GIVEN
+            BSTMap<String, Integer> map = new BSTMap<>();
+            map.put("c", 3);  // root
+            map.put("b", 2);  // left child of c
+            map.put("a", 1);  // left child of b
+
+            // WHEN
+            map.remove("b");
+
+            boolean removed = !map.containsKey("b");
+            boolean aPresent = map.containsKey("a");
+            boolean cPresent = map.containsKey("c");
+
+            // THEN
+            assert removed    : "Error in BSTMap::remove() — failed to remove left child";
+            assert aPresent   : "Error in BSTMap::remove() — left subtree lost after removing its parent";
+            assert cPresent   : "Error in BSTMap::remove() — root lost after removing its left child";
+
+        }
+
+
+
+
+        // CASE 7: remove node in right subtree (not root)
+        {
+            // GIVEN
+            BSTMap<String, Integer> map = new BSTMap<>();
+            map.put("c", 3);  // root
+            map.put("d", 4);  // right child of c
+            map.put("e", 5);  // right child of d
+
+            // WHEN
+            map.remove("d");
+
+            boolean removed = !map.containsKey("d");
+            boolean ePresent = map.containsKey("e");
+            boolean cPresent = map.containsKey("c");
+
+            // THEN
+            assert removed  : "Error in BSTMap::remove() — failed to remove right child";
+            assert ePresent : "Error in BSTMap::remove() — right subtree lost after removing its parent";
+            assert cPresent : "Error in BSTMap::remove() — root lost after removing its right child";
+
+        }
+
+
+
+        // CASE 8: update and remove internal node with two children
+        {
+            // GIVEN
+            BSTMap<String, Integer> map = new BSTMap<>();
+            map.put("b", 2);  // root
+            map.put("a", 1);  // left child of b
+            map.put("d", 4);  // right child of b
+            map.put("c", 3);  // left child of d
+            map.put("e", 5);  // right child of d
+
+            // WHEN
+            map.put("d", 40);  // update internal node
+            int updated = map.get("d");
+
+            map.remove("d");   // remove internal node
+
+            boolean removed = !map.containsKey("d");
+            boolean childrenPresent = map.containsKey("c") && map.containsKey("e");
+            boolean othersPresent = map.containsKey("b") && map.containsKey("a");
+
+            // THEN
+            assert updated == 40 : "Error in BSTMap::put() — failed to update value of internal node 'd'";
+            assert removed : "Error in BSTMap::remove() — failed to remove internal node 'd' with two children";
+            assert childrenPresent : "Error in BSTMap::remove() — children 'c' and 'e' of removed node 'd' were lost";
+            assert othersPresent : "Error in BSTMap::remove() — unrelated nodes 'a' or 'b' were affected by removal of 'd'";
+        }
+
         System.out.println("*** Done testing BSTMap! ***\n");
     }
+
 
     public static void main(String[] args) {
         bstMapTests();

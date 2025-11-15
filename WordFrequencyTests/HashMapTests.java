@@ -6,6 +6,8 @@ last modified:  11/14/2025
 How to run:     java -ea HashMapTests
 */
 
+import java.util.HashMap;
+
 public class HashMapTests {
 
     public static void hashMapTests() {
@@ -83,6 +85,34 @@ public class HashMapTests {
             // THEN
             assert !contains : "Error in HashMap::remove()";
         }
+
+
+        // CASE 6: remove key from map with multiple entries
+        {
+            // GIVEN
+            HashMap<String, Integer> map = new HashMap<>();
+            map.put("apple", 5);
+            map.put("banana", 10);
+            map.put("cherry", 15);
+
+            // WHEN
+            map.remove("banana");
+            boolean containsBanana = map.containsKey("banana");
+            boolean containsApple = map.containsKey("apple");
+            boolean containsCherry = map.containsKey("cherry");
+            int size = map.size();
+            System.out.println(containsBanana + " == false");
+            System.out.println(containsApple + " == true");
+            System.out.println(containsCherry + " == true");
+            System.out.println(size + " == 2");
+
+            // THEN
+            assert !containsBanana : "Error in HashMap::remove() — failed to remove 'banana' from multi-element map";
+            assert containsApple : "Error in HashMap::remove() — 'apple' was incorrectly removed whne removing 'banana'";
+            assert containsCherry : "Error in HashMap::remove() — 'cherry' was incorrectly removed whne removing 'banana'";
+            assert size == 2 : "Error in HashMap::size() wrong size after removing one element from multi-element map";
+        }
+
 
         System.out.println("*** Done testing HashMap! ***\n");
     }
