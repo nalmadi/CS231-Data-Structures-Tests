@@ -48,7 +48,7 @@ public class KeyValuePairTests {
             System.out.println(result + " == true");
 
             // THEN
-            assert result == true : "Error in KeyValuePair::equals()";
+            assert result == true : "Error in KeyValuePair::equals() for equal pairs";
         }
 
         // CASE 4: testing equals() different key or value
@@ -65,8 +65,22 @@ public class KeyValuePairTests {
             System.out.println(r2 + " == false");
 
             // THEN
-            assert !r1 : "Error in KeyValuePair::equals()";
-            assert !r2 : "Error in KeyValuePair::equals()";
+            assert !r1 : "Error in KeyValuePair::equals() different value";
+            assert !r2 : "Error in KeyValuePair::equals() different key";
+        }
+
+        // CASE 5: testing toString()
+        {
+            // GIVEN
+            KeyValuePair<String, Integer> kvp = new KeyValuePair<>("x", 42);
+
+            // WHEN
+            String s = kvp.toString();
+            System.out.println("toString: " + s);
+
+            // THEN
+            assert s.contains("x") && s.contains("42")
+                : "Error in KeyValuePair::toString() must contain key and value";
         }
 
         System.out.println("*** Done testing KeyValuePair! ***\n");
