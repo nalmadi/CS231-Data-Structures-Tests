@@ -30,8 +30,7 @@ public class AgentSimulationTests {
         return iterations;
     }
 
-    public static double agentSimulationTests() {
-        double score = 0.;
+    public static void agentSimulationTests() {
 
         // Averages repeated runs for stability
         {
@@ -44,11 +43,8 @@ public class AgentSimulationTests {
                 }
                 int average = totalIterations / 20;
                 System.out.println("Average iterations for N=" + sizes[i] + ": " + average);
-                if ((average < expected[i] + 100) && (average > expected[i] - 100)) {
-                    score += 1.;
-                } else {
-                    assert false : "Simulation did not converge within expected range for N=" + sizes[i];
-                }
+                assert (average < expected[i] + 100) && (average > expected[i] - 100)
+                        : "Simulation did not converge within expected range for N=" + sizes[i];
             }
         }
 
@@ -58,15 +54,10 @@ public class AgentSimulationTests {
             System.out.println("Iterations for N=250: " + iterations);
             boolean passed = iterations == 5000;
             assert passed : "Simulation should run for the full limit when N=250";
-            if (passed) {
-                score += 1.;
-            }
         }
-
-        return score;
     }
 
     public static void main(String[] args) {
-        System.out.println(agentSimulationTests());
+        agentSimulationTests();
     }
 }
