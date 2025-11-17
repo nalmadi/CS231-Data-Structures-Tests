@@ -1,111 +1,99 @@
 /*
 file name:      AgentTests.java
-Authors:        Rishit Chatterjee
-last modified:  11/14/2025
+Authors:        Robbie Bennett, Rishit Chatterjee, Rana Moeez Hassan
+last modified:  11/17/2025
 
-How to run:     java -ea AgentTests
+How to run:
+    javac *.java
+    java -ea AgentTests
 */
+
+import java.awt.Graphics;
 
 public class AgentTests {
 
+    // Simple child class to allow instantiation of abstract Agent
+    private static class TestAgent extends Agent {
+        public TestAgent(double x, double y, int r) { super(x, y, r); }
+        public void updateState(Landscape scape) { /* do nothing */ }
+        public void draw(Graphics g) { /* do nothing */ }
+    }
+
     public static void agentTests() {
 
-        // Verifies constructors seed initial state
-        // case 1: testing constructors
+        // First four tests test the Agent class
+        // case 1: constructor + getters
         {
-            SocialAgent social = new SocialAgent(10.0, 20.0, 5);
-            AntiSocialAgent anti = new AntiSocialAgent(30.5, 40.5, 8);
+            // given
+            TestAgent a = new TestAgent(10.0, 20.0, 5);
 
-            boolean passed = (social.getX() == 10.0) && (social.getY() == 20.0) && (social.getRadius() == 5)
-                    && (anti.getX() == 30.5) && (anti.getY() == 40.5) && (anti.getRadius() == 8);
+            // when
+            System.out.println("=== case 1: constructor + getters ===");
+            System.out.println(a.getX() + " == 10.0");
+            System.out.println(a.getY() + " == 20.0");
+            System.out.println(a.getRadius() + " == 5");
+            System.out.println(a.getMoved() + " == false");
 
-            System.out.println("Constructors initialize position and radius: " + passed);
-            assert passed : "Error in SocialAgent/AntiSocialAgent constructors";
+            // then
+            assert a.getX() == 10.0 : "Error in Agent::getX() or constructor";
+            assert a.getY() == 20.0 : "Error in Agent::getY() or constructor";
+            assert a.getRadius() == 5 : "Error in Agent::getRadius() or constructor";
+            assert a.getMoved() == false : "Error in Agent::getMoved() default";
         }
 
-        // Confirms getX exposes stored coordinate
-        // case 2: testing getX()
+        // case 2: testing setX(), setY(), setRadius(), setMove()
         {
-            SocialAgent social = new SocialAgent(5.5, 7.5, 3);
-            AntiSocialAgent anti = new AntiSocialAgent(2.25, 4.75, 6);
+            TestAgent a = new TestAgent(0.0, 0.0, 1);
 
-            boolean passed = (Math.abs(social.getX() - 5.5) < 1e-6) && (Math.abs(anti.getX() - 2.25) < 1e-6);
-            System.out.println("getX returns the stored x-position: " + passed);
-            assert passed : "Error in Agent::getX()";
+            a.setX(7.5);
+            a.setY(9.2);
+            a.setRadius(12);
+            a.setMove(true);
+
+            System.out.println("\n=== case 2: setters ===");
+            System.out.println(a.getX() + " == 7.5");
+            System.out.println(a.getY() + " == 9.2");
+            System.out.println(a.getRadius() + " == 12");
+            System.out.println(a.getMoved() + " == true");
+
+            assert a.getX() == 7.5 : "Error in Agent::setX or getX";
+            assert a.getY() == 9.2 : "Error in Agent::setY or getY";
+            assert a.getRadius() == 12 : "Error in Agent::setRadius or getRadius";
+            assert a.getMoved() == true : "Error in Agent::setMove or getMoved";
         }
 
-        // Confirms getY mirrors constructor position
-        // case 3: testing getY()
+        // case 3: testing hasMoved()
         {
-            SocialAgent social = new SocialAgent(1.0, 9.0, 4);
-            AntiSocialAgent anti = new AntiSocialAgent(8.0, 3.5, 5);
+            TestAgent a = new TestAgent(3.0, 4.0, 5);
 
-            boolean passed = (Math.abs(social.getY() - 9.0) < 1e-6) && (Math.abs(anti.getY() - 3.5) < 1e-6);
-            System.out.println("getY returns the stored y-position: " + passed);
-            assert passed : "Error in Agent::getY()";
+            boolean before = a.hasMoved();
+            a.setMove(true);
+            boolean after  = a.hasMoved();
+
+            System.out.println("\n=== case 3: hasMoved() ===");
+            System.out.println(before + " == false");
+            System.out.println(after  + " == true");
+
+            assert before == false : "Error in Agent::hasMoved() default";
+            assert after  == true  : "Error in Agent::hasMoved() after setMove(true)";
         }
 
-        // Validates radius getter returns latest
-        // case 4: testing getRadius()
-        {
-            SocialAgent social = new SocialAgent(0.0, 0.0, 12);
-            AntiSocialAgent anti = new AntiSocialAgent(0.0, 0.0, 20);
 
-            boolean passed = (social.getRadius() == 12) && (anti.getRadius() == 20);
-            System.out.println("getRadius returns the stored radius: " + passed);
-            assert passed : "Error in Agent::getRadius()";
+        // case 4: testing toString()
+        {
+            TestAgent a = new TestAgent(0.0, 0.0, 5);
+
+            System.out.println("\n=== case 4: toString() ===");
+            System.out.println(a.toString() + " == X:  0.0  Y: 0.0");
+
+            assert a.toString().equals("X:  0.0  Y: 0.0") 
+                : "Error in Agent::toString() formatting";
         }
 
-        // Ensures setX mutator persists updates
-        // case 5: testing setX()
-        {
-            SocialAgent social = new SocialAgent(0.0, 0.0, 5);
-            AntiSocialAgent anti = new AntiSocialAgent(0.0, 0.0, 5);
-            social.setX(15.75);
-            anti.setX(22.25);
-
-            boolean passed = (Math.abs(social.getX() - 15.75) < 1e-6) && (Math.abs(anti.getX() - 22.25) < 1e-6);
-            System.out.println("setX updates the x-position: " + passed);
-            assert passed : "Error in Agent::setX()";
-        }
-
-        // Ensures setY mutator persists updates
-        // case 6: testing setY()
-        {
-            SocialAgent social = new SocialAgent(0.0, 0.0, 5);
-            AntiSocialAgent anti = new AntiSocialAgent(0.0, 0.0, 5);
-            social.setY(31.5);
-            anti.setY(42.25);
-
-            boolean passed = (Math.abs(social.getY() - 31.5) < 1e-6) && (Math.abs(anti.getY() - 42.25) < 1e-6);
-            System.out.println("setY updates the y-position: " + passed);
-            assert passed : "Error in Agent::setY()";
-        }
-
-        // Confirms setRadius adjusts accessors
-        // case 7: testing setRadius()
-        {
-            SocialAgent social = new SocialAgent(0.0, 0.0, 5);
-            AntiSocialAgent anti = new AntiSocialAgent(0.0, 0.0, 5);
-            social.setRadius(18);
-            anti.setRadius(7);
-
-            boolean passed = (social.getRadius() == 18) && (anti.getRadius() == 7);
-            System.out.println("setRadius updates the radius: " + passed);
-            assert passed : "Error in Agent::setRadius()";
-        }
-
-        // Checks default moved flag remains
-        // case 8: testing getMoved()
-        {
-            SocialAgent social = new SocialAgent(0.0, 0.0, 5);
-            AntiSocialAgent anti = new AntiSocialAgent(0.0, 0.0, 5);
-
-            boolean passed = (!social.getMoved()) && (!anti.getMoved());
-            System.out.println("Agents default to not having moved: " + passed);
-            assert passed : "Error in Agent::getMoved()";
-        }
+        System.out.println("\n*** Done testing Agent! ***\n");
     }
+
+    
 
     public static void main(String[] args) {
         agentTests();
