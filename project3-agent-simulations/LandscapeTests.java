@@ -79,8 +79,10 @@ public class LandscapeTests {
         System.out.println("Landscape description after addAgent: " + desc);
 
         LinkedList<Agent> neighbors = scape.getNeighbors(10.0, 10.0, 1.0);
-        assert neighbors.size() == 1 : "Expected 1 agent after addAgent";
-        assert neighbors.get(0) == a1 : "Neighbor mismatch after addAgent";
+        assert neighbors.size() == 1 :
+                "Error: Expected 1 agent in neighbors after addAgent, but got " + neighbors.size();
+        assert neighbors.get(0) == a1 :
+                "Error: The neighbor is not the same Agent that was added.";
         assert desc.contains("1") : "Landscape::toString should reflect agent count";
     }
 
@@ -90,6 +92,7 @@ public class LandscapeTests {
         Agent center = new SocialAgent(10.0, 10.0, 5);
         Agent close = new SocialAgent(13.0, 14.0, 5);
         Agent far = new SocialAgent(30.0, 30.0, 5);
+
         scape.addAgent(center);
         scape.addAgent(close);
         scape.addAgent(far);
@@ -98,18 +101,15 @@ public class LandscapeTests {
         System.out.println("Neighbors of (10,10) within radius 5: size = " + neighbors.size());
 
         int nSize = neighbors.size();
-        assert nSize == 2 : "Expected two neighbors";
+        assert nSize == 2 :
+                "Error: getNeighbors returned " + nSize + " neighbors, expected 2";
 
         boolean foundCenter = false;
         boolean foundClose = false;
         for (int i = 0; i < nSize; i++) {
             Agent a = neighbors.get(i);
-            if (a == center) {
-                foundCenter = true;
-            }
-            if (a == close) {
-                foundClose = true;
-            }
+            if (a == center) foundCenter = true;
+            if (a == close) foundClose = true;
             assert a != far : "Far agent appeared in neighbor list";
         }
 
@@ -134,7 +134,9 @@ public class LandscapeTests {
         Color c = new Color(rgb, true);
         System.out.println("Color drawn at (" + sampleX + ", " + sampleY + "): " + c);
 
-        assert c.getAlpha() != 0 : "draw() didn't render onto Graphics";
-        assert c.getBlue() > 0 : "Expected blue-ish SocialAgent pixel";
+        assert c.getAlpha() != 0 :
+                "Error: draw(Graphics) did not modify the image at the expected location.";
+        assert c.getBlue() > 0 :
+                "Error: Expected a blue-ish color at the agent location, but got " + c;
     }
 }
