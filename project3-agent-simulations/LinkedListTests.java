@@ -1,7 +1,7 @@
 /*
 file name:      LinkedListTests.java
-Authors:        Rishit Chatterjee
-last modified:  11/14/2025
+Authors:        Rishit Chatterjee, Rana Moeez Hassan 
+last modified:  11/17/2025
 
 How to run:     java -ea LinkedListTests
 */
@@ -10,7 +10,7 @@ public class LinkedListTests {
 
     public static void main(String[] args) {
 
-        // Validates empty constructor baseline state
+        // Validates constructor creates empty list
         // case 1: testing LinkedList()
         {
             LinkedList<Integer> ll = new LinkedList<Integer>();
@@ -18,7 +18,7 @@ public class LinkedListTests {
             assert ll != null : "Error in LinkedList::LinkedList()";
         }
 
-        // Verifies head insertion bumps size
+        // Confirms push-front growth updates size
         // case 2: testing add(T item)
         {
             LinkedList<Integer> ll = new LinkedList<Integer>();
@@ -27,6 +27,19 @@ public class LinkedListTests {
             }
             System.out.println(ll.size() + " == 5");
             assert ll.size() == 5 : "Error in LinkedList::add(T) or LinkedList::size()";
+        }
+
+        // Provides visual confirmation of order
+        // case 2.5: sanity checking toString()
+        {
+            LinkedList<Integer> ll = new LinkedList<Integer>();
+            for (int i = 0; i < 5; i++) {
+                ll.add(i);
+            }
+            System.out.println("\nIf your toString is working, you should see a list that starts at 4 and goes down to 0.");
+            System.out.println("I.e. it should look like this, possibly with small changes to formatting: ");
+            System.out.println("Example ll:\t 4, 3, 2, 1, 0");
+            System.out.println("Your ll:\t " + ll + "\n");
         }
 
         // Ensures positional insert respects size
@@ -43,8 +56,28 @@ public class LinkedListTests {
             assert ll.size() == 6 : "Error in LinkedList::add(int, T) or LinkedList::size()";
         }
 
+        // Verifies indexed insert maintains order
+        // case 4: testing add(int, T) with order verification
+        {
+            LinkedList<Integer> ll = new LinkedList<Integer>();
+            ll.add(0, 1);
+            ll.add(1, 4);
+            ll.add(1, 2);
+            ll.add(0, 0);
+            ll.add(4, 5);
+            ll.add(3, 3);
+
+            for (int i = 0; i < ll.size(); i++) {
+                System.out.println(ll.get(i) + " == " + i);
+            }
+
+            for (int i = 0; i < ll.size(); i++) {
+                assert ll.get(i) == i : "Error in LinkedList::add(int, T) or LinkedList::get(int)";
+            }
+        }
+
         // Confirms clear empties nodes entirely
-        // case 4: testing clear()
+        // case 5: testing clear()
         {
             LinkedList<Integer> ll = new LinkedList<Integer>();
             for (int value : new int[]{1, 2, 3}) {
@@ -56,8 +89,8 @@ public class LinkedListTests {
             assert ll.isEmpty() : "Error in LinkedList::clear() or LinkedList::isEmpty()";
         }
 
-        // Checks contains for hit miss
-        // case 5: testing contains()
+        // Checks membership detection for matches
+        // case 6: testing contains(Object)
         {
             LinkedList<Integer> ll = new LinkedList<Integer>();
             for (int i = 0; i < 3; i++) {
@@ -72,7 +105,7 @@ public class LinkedListTests {
         }
 
         // Validates equals semantics against variants
-        // case 6: testing equals()
+        // case 7: testing equals()
         {
             LinkedList<Integer> list1 = new LinkedList<Integer>();
             LinkedList<Integer> list2 = new LinkedList<Integer>();
@@ -100,7 +133,7 @@ public class LinkedListTests {
         }
 
         // Verifies random access retrieval accuracy
-        // case 7: testing get(int)
+        // case 8: testing get(int)
         {
             LinkedList<Integer> ll = new LinkedList<Integer>();
             for (int i = 0; i < 5; i++) {
@@ -115,7 +148,7 @@ public class LinkedListTests {
         }
 
         // Confirms emptiness toggles appropriately
-        // case 8: testing isEmpty()
+        // case 9: testing isEmpty()
         {
             LinkedList<Integer> list1 = new LinkedList<Integer>();
             LinkedList<Integer> list2 = new LinkedList<Integer>();
@@ -127,7 +160,7 @@ public class LinkedListTests {
         }
 
         // Ensures head removal returns front
-        // case 9: testing remove()
+        // case 10: testing remove()
         {
             LinkedList<Integer> ll = new LinkedList<Integer>();
             for (int i = 0; i < 5; i++) {
@@ -142,7 +175,7 @@ public class LinkedListTests {
         }
 
         // Validates indexed removal re-links properly
-        // case 10: testing remove(int)
+        // case 11: testing remove(int)
         {
             LinkedList<Integer> ll = new LinkedList<Integer>();
             for (int i = 0; i < 8; i++) {
@@ -160,7 +193,7 @@ public class LinkedListTests {
         }
 
         // Confirms iterator covers contiguous sequence
-        // case 11: testing iterator()
+        // case 12: testing iterator()
         {
             LinkedList<Integer> ll = new LinkedList<Integer>();
             ll.add(0, 1);
