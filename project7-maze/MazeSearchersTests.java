@@ -1,3 +1,10 @@
+/*
+file name:      MazeSearchersTests.java
+Authors:        Yubin Moon
+last modified:  12/08/2025
+
+How to run:     java -ea MazeSearchersTests
+*/
 
 import java.util.LinkedList;
 
