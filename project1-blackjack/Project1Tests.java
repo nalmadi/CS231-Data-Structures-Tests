@@ -14,5 +14,6 @@ public class Project1Tests {
         CardTests.cardTests();
         HandTests.handTests();
         DeckTests.deckTests();
+        BlackjackTests.blackjackTests();
     }
 }
