@@ -79,6 +79,39 @@ public class VertexEdgeTests {
             assert a.incidentEdges().size() == 1 : "Returned list should be a copy";
         }
 
+        // Vertex value should be gettable and settable (required for Voronoi Game)
+        {
+            Vertex a = new Vertex();
+            a.setValue(75);
+            assert a.getValue() == 75 : "getValue should return set value";
+            
+            a.setValue(0);
+            assert a.getValue() == 0 : "Value should update to zero";
+            
+            a.setValue(100);
+            assert a.getValue() == 100 : "Value should update to max";
+        }
+
+        // Multiple vertices should maintain independent values
+        {
+            Vertex a = new Vertex();
+            Vertex b = new Vertex();
+            Vertex c = new Vertex();
+            
+            a.setValue(10);
+            b.setValue(50);
+            c.setValue(90);
+            
+            assert a.getValue() == 10 : "Vertex a should have value 10";
+            assert b.getValue() == 50 : "Vertex b should have value 50";
+            assert c.getValue() == 90 : "Vertex c should have value 90";
+            
+            // Changing one shouldn't affect others
+            a.setValue(99);
+            assert b.getValue() == 50 : "Changing a should not affect b";
+            assert c.getValue() == 90 : "Changing a should not affect c";
+        }
+
         System.out.println("Finished VertexEdgeTests!");
     }
 }

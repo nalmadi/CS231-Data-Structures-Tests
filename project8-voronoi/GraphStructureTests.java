@@ -78,6 +78,58 @@ public class GraphStructureTests {
             new java.io.File(filename).delete();
         }
 
+        // Vertices should support getValue/setValue for Voronoi Game scoring
+        {
+            Graph graph = new Graph();
+            Vertex v0 = graph.addVertex();
+            Vertex v1 = graph.addVertex();
+            
+            v0.setValue(25);
+            v1.setValue(75);
+            
+            assert v0.getValue() == 25 : "Vertex value should be retrievable after set";
+            assert v1.getValue() == 75 : "Each vertex should maintain its own value";
+            
+            // Values should persist through graph operations
+            Edge e = graph.addEdge(v0, v1, 1.5);
+            assert v0.getValue() == 25 : "Adding edge should not change vertex value";
+            assert v1.getValue() == 75 : "Adding edge should not change vertex value";
+        }
+
+        // Graph vertices should be accessible for value-based scoring
+        {
+            Graph graph = new Graph(5);
+            int totalValue = 0;
+            
+            // Set values on all vertices
+            int idx = 0;
+            for (Vertex v : graph.getVertices()) {
+                v.setValue(idx * 10); // 0, 10, 20, 30, 40
+                idx++;
+            }
+            
+            // Sum all values (simulating game scoring)
+            for (Vertex v : graph.getVertices()) {
+                totalValue += v.getValue();
+            }
+            
+            assert totalValue == 100 : "Total value should be sum of all vertex values (0+10+20+30+40=100)";
+        }
+
+        // Edge distances should be retrievable for Dijkstra's algorithm
+        {
+            Graph graph = new Graph();
+            Vertex v0 = graph.addVertex();
+            Vertex v1 = graph.addVertex();
+            Vertex v2 = graph.addVertex();
+            
+            Edge e1 = graph.addEdge(v0, v1, 1.5);
+            Edge e2 = graph.addEdge(v1, v2, 1.8);
+            
+            assert Math.abs(e1.distance() - 1.5) < 1e-9 : "Edge distance should match constructor arg";
+            assert Math.abs(e2.distance() - 1.8) < 1e-9 : "Edge distance should match constructor arg";
+        }
+
         System.out.println("Finished GraphStructureTests!");
     }
 
