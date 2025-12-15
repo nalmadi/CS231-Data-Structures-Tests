@@ -1,7 +1,7 @@
 /*
 file name:      LinkedListTests.java
-Authors:        Rishit Chatterjee
-last modified:  11/14/2025
+Authors:        Rishit Chatterjee, Rana Moeez Hassan 
+last modified:  11/17/2025
 
 How to run:     java -ea LinkedListTests
 */
@@ -42,23 +42,8 @@ public class LinkedListTests {
             System.out.println("Your ll:\t " + ll + "\n");
         }
 
-        // Ensures positional access returns expected
-        // case 3: testing get(int)
-        {
-            LinkedList<Integer> ll = new LinkedList<Integer>();
-            for (int i = 0; i < 5; i++) {
-                ll.add(4 - i);
-            }
-            System.out.println(ll.get(0) + " == 0");
-            System.out.println(ll.get(3) + " == 3");
-            System.out.println(ll.get(4) + " == 4");
-            assert ll.get(0) == 0 : "Error in LinkedList::get(int)";
-            assert ll.get(3) == 3 : "Error in LinkedList::get(int)";
-            assert ll.get(4) == 4 : "Error in LinkedList::get(int)";
-        }
-
-        // Verifies indexed insert maintains order
-        // case 4: testing add(int, T)
+        // Ensures positional insert respects size
+        // case 3: testing add(int, T)
         {
             LinkedList<Integer> ll = new LinkedList<Integer>();
             ll.add(0, 1);
@@ -71,6 +56,26 @@ public class LinkedListTests {
             assert ll.size() == 6 : "Error in LinkedList::add(int, T) or LinkedList::size()";
             for (int i = 0; i < ll.size(); i++) {
                 System.out.println(ll.get(i) + " == " + i);
+                assert ll.get(i) == i : "Error in LinkedList::add(int, T) or LinkedList::get(int)";
+            }
+        }
+
+        // Verifies indexed insert maintains order
+        // case 4: testing add(int, T) with order verification
+        {
+            LinkedList<Integer> ll = new LinkedList<Integer>();
+            ll.add(0, 1);
+            ll.add(1, 4);
+            ll.add(1, 2);
+            ll.add(0, 0);
+            ll.add(4, 5);
+            ll.add(3, 3);
+
+            for (int i = 0; i < ll.size(); i++) {
+                System.out.println(ll.get(i) + " == " + i);
+            }
+
+            for (int i = 0; i < ll.size(); i++) {
                 assert ll.get(i) == i : "Error in LinkedList::add(int, T) or LinkedList::get(int)";
             }
         }
@@ -131,8 +136,23 @@ public class LinkedListTests {
             assert !list4.equals("Hello") : "Error in LinkedList::equals(Object)";
         }
 
+        // Verifies random access retrieval accuracy
+        // case 8: testing get(int)
+        {
+            LinkedList<Integer> ll = new LinkedList<Integer>();
+            for (int i = 0; i < 5; i++) {
+                ll.add(4 - i);
+            }
+            System.out.println(ll.get(0) + " == 0");
+            System.out.println(ll.get(3) + " == 3");
+            System.out.println(ll.get(4) + " == 4");
+            assert ll.get(0) == 0 : "Error in LinkedList::get(int)";
+            assert ll.get(3) == 3 : "Error in LinkedList::get(int)";
+            assert ll.get(4) == 4 : "Error in LinkedList::get(int)";
+        }
+
         // Confirms emptiness toggles appropriately
-        // case 8: testing isEmpty()
+        // case 9: testing isEmpty()
         {
             LinkedList<Integer> list1 = new LinkedList<Integer>();
             LinkedList<Integer> list2 = new LinkedList<Integer>();
@@ -144,7 +164,7 @@ public class LinkedListTests {
         }
 
         // Ensures head removal returns front
-        // case 9: testing remove()
+        // case 10: testing remove()
         {
             LinkedList<Integer> ll = new LinkedList<Integer>();
             for (int i = 0; i < 5; i++) {
@@ -159,7 +179,7 @@ public class LinkedListTests {
         }
 
         // Validates indexed removal re-links properly
-        // case 10: testing remove(int)
+        // case 11: testing remove(int)
         {
             LinkedList<Integer> ll = new LinkedList<Integer>();
             for (int i = 0; i < 8; i++) {
@@ -177,7 +197,7 @@ public class LinkedListTests {
         }
 
         // Confirms iterator covers contiguous sequence
-        // case 11: testing iterator()
+        // case 12: testing iterator()
         {
             LinkedList<Integer> ll = new LinkedList<Integer>();
             ll.add(0, 1);

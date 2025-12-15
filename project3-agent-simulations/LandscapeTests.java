@@ -1,11 +1,10 @@
 /*
 file name:      LandscapeTests.java
-Authors:        Rishit Chatterjee
-last modified:  11/14/2025
+Authors:        Yubin Moon, Rana Moeez Hassan
+last modified:  11/17/2025
 
 How to run:     java -ea LandscapeTests
 */
-
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
