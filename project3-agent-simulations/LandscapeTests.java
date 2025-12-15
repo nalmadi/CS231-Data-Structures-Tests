@@ -9,7 +9,6 @@ How to run:     java -ea LandscapeTests
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.util.LinkedList;
 
 public class LandscapeTests {
 
