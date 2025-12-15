@@ -26,7 +26,7 @@ public class LinkedListTests {
                 ll.add(i);
             }
             System.out.println(ll.size() + " == 5");
-            assert ll.size() == 5 : "Error in LinkedList::add(T) or LinkedList::size()";
+            assert ll.size() == 5 : "Error in LinkedList::add(T item) or LinkedList::size()";
         }
 
         // Provides visual confirmation of order
@@ -54,6 +54,10 @@ public class LinkedListTests {
             ll.add(3, 6);
             System.out.println(ll.size() + " == 6");
             assert ll.size() == 6 : "Error in LinkedList::add(int, T) or LinkedList::size()";
+            for (int i = 0; i < ll.size(); i++) {
+                System.out.println(ll.get(i) + " == " + i);
+                assert ll.get(i) == i : "Error in LinkedList::add(int, T) or LinkedList::get(int)";
+            }
         }
 
         // Verifies indexed insert maintains order
@@ -212,6 +216,6 @@ public class LinkedListTests {
             assert counter == ll.size() : "Error: iterator skipped elements";
         }
 
-        System.out.println("Done testing LinkedList!");
+        System.out.println("\n\nCongrats! You passed the lab checkpoint and full suite!\n\n");
     }
 }
