@@ -3,7 +3,7 @@ file name:      AgentStateTests.java
 Authors:        Rana Moeez Hassan, Yubin Moon, Rishit Chatterjee, Robbie Bennett
 last modified:  11/17/2025
 
-How to run:     java -ea AgentStateTests
+How to run:     java -ea UpdateStateTests
 */
 
 public class UpdateStateTests {
